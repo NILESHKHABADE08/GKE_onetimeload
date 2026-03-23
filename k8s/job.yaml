@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: bq-to-mongo
-        image: gcr.io/YOUR_PROJECT_ID/bq-to-mongo:latest
+        image: gcr.io/project-0eac7b4f-a7b9-40c4-8ac/bq-to-mongo:latest
 
         env:
         - name: PROJECT_ID
