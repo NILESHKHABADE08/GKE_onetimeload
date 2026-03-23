@@ -11,13 +11,13 @@ spec:
 
         env:
         - name: PROJECT_ID
-          value: "your-project-id"
+          value: "project-0eac7b4f-a7b9-40c4-8ac"
 
         - name: DATASET
-          value: "your_dataset"
+          value: "project-0eac7b4f-a7b9-40c4-8ac.patients"
 
         - name: TABLE
-          value: "your_table"
+          value: "project-0eac7b4f-a7b9-40c4-8ac.patients.dependants"
 
         - name: BATCH_SIZE
           value: "1000"
