@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bq-to-mongo-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: bq-to-mongo
+        image: gcr.io/YOUR_PROJECT_ID/bq-to-mongo:latest
+
+        env:
+        - name: PROJECT_ID
+          value: "your-project-id"
+
+        - name: DATASET
+          value: "your_dataset"
+
+        - name: TABLE
+          value: "your_table"
+
+        - name: BATCH_SIZE
+          value: "1000"
+
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: bq-mongo-secret
+              key: MONGO_URI
+
+        - name: MONGO_DB
+          valueFrom:
+            secretKeyRef:
+              name: bq-mongo-secret
+              key: MONGO_DB
+
+        - name: MONGO_COLLECTION
+          valueFrom:
+            secretKeyRef:
+              name: bq-mongo-secret
+              key: MONGO_COLLECTION
+
+      restartPolicy: Never
+  backoffLimit: 2
