@@ -1,6 +1,13 @@
 FROM python:3.10-slim
+
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["python", "app/main.py"]
+
+# 👇 FIX: copy from app folder
+COPY app/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 👇 copy full app
+COPY app/ .
+
+CMD ["python", "main.py"]
