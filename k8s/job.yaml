@@ -7,20 +7,27 @@ spec:
     spec:
       containers:
       - name: bq-to-mongo
-        image: gcr.io/project-0eac7b4f-a7b9-40c4-8ac/bq-to-mongo:latest
+        image: asia-south1-docker.pkg.dev/project-0eac7b4f-a7b9-40c4-8ac/my-repo/bq-to-mongo:latest
 
         env:
         - name: PROJECT_ID
           value: "project-0eac7b4f-a7b9-40c4-8ac"
 
         - name: DATASET
-          value: "project-0eac7b4f-a7b9-40c4-8ac.patients"
+          value: "patients"
 
         - name: TABLE
-          value: "project-0eac7b4f-a7b9-40c4-8ac.patients.dependants"
+          value: "dependants"
 
         - name: BATCH_SIZE
           value: "1000"
+
+        # ✅ ADD THESE TWO (VERY IMPORTANT)
+        - name: MONGO_DB
+          value: "nilesh"
+
+        - name: MONGO_COLLECTION
+          value: "gketest"
 
         - name: MONGO_URI
           valueFrom:
@@ -28,17 +35,4 @@ spec:
               name: bq-mongo-secret
               key: MONGO_URI
 
-        - name: MONGO_DB
-          valueFrom:
-            secretKeyRef:
-              name: bq-mongo-secret
-              key: MONGO_DB
-
-        - name: MONGO_COLLECTION
-          valueFrom:
-            secretKeyRef:
-              name: bq-mongo-secret
-              key: MONGO_COLLECTION
-
       restartPolicy: Never
-  backoffLimit: 2
