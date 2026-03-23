@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bq-to-mongo-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: app
+        image: IMAGE_PLACEHOLDER
+        env:
+        - name: BQ_PROJECT
+          value: "your-project-id"
+        - name: BQ_DATASET
+          value: "your_dataset"
+      restartPolicy: Never
